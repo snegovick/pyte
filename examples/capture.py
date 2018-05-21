@@ -39,10 +39,14 @@ if __name__ == "__main__":
                     ValueError):        # Nothing to read.
                 break
             else:
-                data = os.read(master_fd, 1024)
-                if not data:
+                try:
+                    data = os.read(master_fd, 1024)
+                except (OSError):       # Nothing to read
                     break
+                else:
+                    if not data:
+                        break
 
-                handle.write(data)
+                    handle.write(data)
 
         os.kill(p_pid, signal.SIGTERM)
