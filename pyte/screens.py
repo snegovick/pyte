@@ -854,7 +854,7 @@ class Screen(object):
         self.cursor_up(count)
         self.carriage_return()
 
-    def cursor_down(self, count=None):
+    def cursor_down(self, count=None, *args):
         """Move cursor down the indicated # of lines in same column.
         Cursor stops at bottom margin.
 
@@ -895,7 +895,7 @@ class Screen(object):
         self.cursor.x += count or 1
         self.ensure_hbounds()
 
-    def cursor_position(self, line=None, column=None):
+    def cursor_position(self, line=None, column=None, *args):
         """Set the cursor to a specific `line` and `column`.
 
         Cursor is allowed to move out of the scrolling region only when
@@ -1022,7 +1022,7 @@ class Screen(object):
         if mode == 0 and not kwargs.get("private"):
             self.write_process_input(ctrl.CSI + "?6c")
 
-    def report_device_status(self, mode):
+    def report_device_status(self, mode, *args):
         """Report terminal status or cursor position.
 
         :param int mode: if 5 -- terminal status, 6 -- cursor position,
